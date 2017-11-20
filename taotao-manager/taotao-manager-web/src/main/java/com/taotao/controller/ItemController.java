@@ -1,11 +1,13 @@
 package com.taotao.controller;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.taotao.common.pojo.EasyUIResult;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.IItemService;
 
@@ -31,6 +33,13 @@ public class ItemController {
 		TbItem item = itemService.geTbItemById(itemId);
 		
 		return item;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/item/list")
+	public EasyUIResult getItemList(int page , int rows) {
+		EasyUIResult easyUIResult = itemService.getItemList(page, rows);
+		return easyUIResult;
 	}
 	
 }

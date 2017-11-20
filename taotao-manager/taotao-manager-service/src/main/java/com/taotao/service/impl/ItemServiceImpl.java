@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.taotao.common.pojo.EasyUIResult;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemExample;
@@ -41,6 +44,23 @@ public class ItemServiceImpl implements IItemService {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public EasyUIResult getItemList(int pageNum, int pageSize) {
+		
+		TbItemExample example = new TbItemExample();
+		PageHelper.startPage(pageNum, pageSize);
+		
+		List<TbItem> list = tbItemMapper.selectByExample(example);
+		PageInfo<TbItem> pageInfo = new PageInfo<>(list);
+		long total = pageInfo.getTotal();
+		
+		EasyUIResult easyUIResult = new EasyUIResult();
+		easyUIResult.setRows(list);
+		easyUIResult.setTotal(total);
+		
+		return easyUIResult;
 	}
 
 }

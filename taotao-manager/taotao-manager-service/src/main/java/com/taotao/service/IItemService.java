@@ -1,5 +1,6 @@
 package com.taotao.service;
 
+import com.taotao.common.pojo.EasyUIResult;
 import com.taotao.pojo.TbItem;
 
 /**
@@ -14,4 +15,5 @@ public interface IItemService {
 
 	TbItem geTbItemById(long itemId);
 	
+	EasyUIResult getItemList(int pageNum , int pageSize);
 }
