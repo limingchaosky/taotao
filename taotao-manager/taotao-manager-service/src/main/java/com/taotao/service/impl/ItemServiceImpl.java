@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.taotao.common.pojo.EasyUIResult;
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemExample;
@@ -47,7 +47,7 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public EasyUIResult getItemList(int pageNum, int pageSize) {
+	public EasyUIDataGridResult getItemList(int pageNum, int pageSize) {
 		
 		TbItemExample example = new TbItemExample();
 		PageHelper.startPage(pageNum, pageSize);
@@ -56,7 +56,7 @@ public class ItemServiceImpl implements IItemService {
 		PageInfo<TbItem> pageInfo = new PageInfo<>(list);
 		long total = pageInfo.getTotal();
 		
-		EasyUIResult easyUIResult = new EasyUIResult();
+		EasyUIDataGridResult easyUIResult = new EasyUIDataGridResult();
 		easyUIResult.setRows(list);
 		easyUIResult.setTotal(total);
 		

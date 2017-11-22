@@ -2,7 +2,7 @@ package com.taotao.common.pojo;
 
 import java.util.List;
 
-public class EasyUIResult {
+public class EasyUIDataGridResult {
 
 	private long total;
 	

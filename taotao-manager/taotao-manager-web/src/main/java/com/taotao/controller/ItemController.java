@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.taotao.common.pojo.EasyUIResult;
+import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.IItemService;
 
@@ -37,8 +37,8 @@ public class ItemController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/item/list")
-	public EasyUIResult getItemList(int page , int rows) {
-		EasyUIResult easyUIResult = itemService.getItemList(page, rows);
+	public EasyUIDataGridResult getItemList(int page , int rows) {
+		EasyUIDataGridResult easyUIResult = itemService.getItemList(page, rows);
 		return easyUIResult;
 	}
 	
