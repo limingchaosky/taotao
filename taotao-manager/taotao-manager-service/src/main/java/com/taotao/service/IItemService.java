@@ -18,5 +18,7 @@ public interface IItemService {
 	
 	EasyUIDataGridResult getItemList(int pageNum , int pageSize);
 	
-	TaotaoResult createTbitem(TbItem item);
+	TaotaoResult createTbitem(TbItem item, String desc);
+	
+	TaotaoResult insertItemDesc(long itemId, String desc);
 }

@@ -11,8 +11,10 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
+import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbItemExample.Criteria;
 import com.taotao.service.IItemService;
@@ -30,6 +32,9 @@ public class ItemServiceImpl implements IItemService {
 
 	@Autowired
 	private TbItemMapper tbItemMapper;
+	
+	@Autowired
+	private TbItemDescMapper tbItemDescMapper;
 	
 	@Override
 	public TbItem geTbItemById(long itemId) {
@@ -67,7 +72,7 @@ public class ItemServiceImpl implements IItemService {
 	}
 
 	@Override
-	public TaotaoResult createTbitem(TbItem item) {
+	public TaotaoResult createTbitem(TbItem item, String desc) {
 		
 		item.setId(IDUtils.genItemId());
 		
@@ -79,14 +84,31 @@ public class ItemServiceImpl implements IItemService {
 		
 		int res = tbItemMapper.insert(item);
 		
-		System.out.println(item.getId());
-		System.out.println(res);
-		
 		if (res == 0) {
 			return new TaotaoResult(500,"insert eroor",null);
 		}
 		
+		insertItemDesc(item.getId(), desc);
+		
 		return TaotaoResult.ok();
+	}
+
+	@Override
+	public TaotaoResult insertItemDesc(long itemId, String desc) {
+		
+		TbItemDesc itemDesc = new TbItemDesc();
+		itemDesc.setItemId(itemId);
+		itemDesc.setItemDesc(desc);
+		itemDesc.setCreated(new Date());
+		itemDesc.setUpdated(new Date());
+		
+		int res = tbItemDescMapper.insert(itemDesc);
+		
+		if (res == 1) {
+			return TaotaoResult.ok();
+		}
+		
+		return new TaotaoResult(500,"insert eroor",null);
 	}
 
 }
