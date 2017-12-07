@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.pojo.EasyUIDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.IItemService;
 
@@ -40,6 +41,15 @@ public class ItemController {
 	public EasyUIDataGridResult getItemList(int page , int rows) {
 		EasyUIDataGridResult easyUIResult = itemService.getItemList(page, rows);
 		return easyUIResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/item/save")
+	public TaotaoResult createTbitem(TbItem item) {
+		
+		TaotaoResult taotaoResult = itemService.createTbitem(item);
+		
+		return taotaoResult;
 	}
 	
 }
